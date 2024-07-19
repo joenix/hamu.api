@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server/app.js",
-    "start": "pm2 start app.js --name hamuai-api",
+    "start": "pm2 start server/app.js --name hamuai-api",
     "stop": "pm2 stop hamuai-api"
   },
   "license": "MIT",
