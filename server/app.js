@@ -8,7 +8,7 @@ const router = new Router();
 
 const APPID = `wx5d458ff8b11233f0`;
 const APPSECRET = `d4b3ef98adbf73cf3d3faffcaab52b21`;
-const REDIRECT_URI = `http://localhost:3000/api/callback`;
+const REDIRECT_URI = `http://localhost:3000/callback`;
 
 // 微信验证接口
 router.get('/wechat', async (ctx) => {
@@ -29,7 +29,7 @@ router.get('/qr', async (ctx) => {
 });
 
 // 回调路由
-router.get('/api/callback', async (ctx) => {
+router.get('/callback', async (ctx) => {
   const { code } = ctx.query;
 
   if (!code) {
