@@ -46,6 +46,8 @@ router.get('/callback', async (ctx) => {
     const userInfoResponse = await axios.get(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
     const userInfo = userInfoResponse.data;
 
+    console.log('userInfo:', userInfo);
+
     // 响应
     ctx.body = userInfo;
     // ctx.body = `
