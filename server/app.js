@@ -22,8 +22,8 @@ router.get('/wechat', async (ctx) => {
   ctx.body = hash === signature ? echostr : 'Invalid signature';
 });
 
-// 登录路由
-router.get('/api/login', async (ctx) => {
+// 授权重定向接口
+router.get('/qr', async (ctx) => {
   const redirectUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${APPID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
   ctx.redirect(redirectUrl);
 });
@@ -46,6 +46,7 @@ router.get('/api/callback', async (ctx) => {
     const userInfoResponse = await axios.get(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`);
     const userInfo = userInfoResponse.data;
 
+    // 响应
     ctx.body = `
       <h1>Login Successful</h1>
       <p>OpenID: ${userInfo.openid}</p>
