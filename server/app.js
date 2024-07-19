@@ -47,12 +47,13 @@ router.get('/api/callback', async (ctx) => {
     const userInfo = userInfoResponse.data;
 
     // 响应
-    ctx.body = `
-      <h1>Login Successful</h1>
-      <p>OpenID: ${userInfo.openid}</p>
-      <p>Nickname: ${userInfo.nickname}</p>
-      <img src="${userInfo.headimgurl}" alt="Avatar">
-    `;
+    ctx.body = userInfo;
+    // ctx.body = `
+    //   <h1>Login Successful</h1>
+    //   <p>OpenID: ${userInfo.openid}</p>
+    //   <p>Nickname: ${userInfo.nickname}</p>
+    //   <img src="${userInfo.headimgurl}" alt="Avatar">
+    // `;
   } catch (error) {
     console.error(error);
     ctx.body = 'Error during login';
