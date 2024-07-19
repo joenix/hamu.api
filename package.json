@@ -1,0 +1,14 @@
+{
+  "name": "api.hamuai.net",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "koa": "^2.15.3",
+    "koa-router": "^12.0.1"
+  }
+}
