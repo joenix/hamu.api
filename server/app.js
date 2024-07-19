@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const bodyParser = require('koa-bodyparser');
 const crypto = require('crypto');
 const axios = require('axios');
 
@@ -64,6 +65,7 @@ router.get('/callback', async (ctx) => {
   }
 });
 
+app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(7086, () => {
