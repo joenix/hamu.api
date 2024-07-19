@@ -8,7 +8,7 @@ const router = new Router();
 
 const APPID = `wx5d458ff8b11233f0`;
 const APPSECRET = `d4b3ef98adbf73cf3d3faffcaab52b21`;
-const REDIRECT_URI = `http://localhost:3000/callback`;
+const REDIRECT_URI = `http://localhost:7086/callback`;
 
 // 微信验证接口
 router.get('/wechat', async (ctx) => {
@@ -62,6 +62,6 @@ router.get('/callback', async (ctx) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+app.listen(7086, () => {
+  console.log('Server is running on http://localhost:7086');
 });
