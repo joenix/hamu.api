@@ -32,6 +32,8 @@ router.get('/qr', async (ctx) => {
 router.get('/callback', async (ctx) => {
   const { code } = ctx.query;
 
+  console.log('code:', code);
+
   if (!code) {
     ctx.body = 'Authorization failed';
     return;
