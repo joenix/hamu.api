@@ -4,8 +4,6 @@ const bodyParser = require('koa-bodyparser');
 const crypto = require('crypto');
 const axios = require('axios');
 
-const cos = require('./cos');
-
 const app = new Koa();
 const router = new Router();
 
@@ -14,7 +12,7 @@ const APPSECRET = `d4b3ef98adbf73cf3d3faffcaab52b21`;
 const REDIRECT_URI = `http://127.0.0.1:7086/callback`;
 
 // 微信验证接口
-router.get('/verify', async (ctx) => {
+router.get('/', async (ctx) => {
   const { signature, timestamp, nonce, echostr } = ctx.query;
   const token = `hamuai`;
 
@@ -23,28 +21,6 @@ router.get('/verify', async (ctx) => {
   const hash = crypto.createHash('sha1').update(tempStr).digest('hex');
 
   ctx.body = hash === signature ? echostr : 'Invalid signature';
-});
-
-// OSS 服务
-router.get('/oss/:filename', async (ctx) => {
-  const { filename } = ctx.params;
-
-  try {
-    // 获取文件的临时 URL
-    const url = cos.getObjectUrl({
-      Bucket: 'hamu-1323048840',
-      Region: 'ap-shanghai',
-      Key: filename,
-      Sign: true
-    });
-
-    // 重定向到 COS 文件 URL
-    ctx.redirect(url);
-  } catch (error) {
-    ctx.status = 500;
-    ctx.body = 'Error downloading file';
-    console.error(error);
-  }
 });
 
 // 授权重定向接口
