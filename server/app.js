@@ -13,18 +13,6 @@ const APPID = `wx5d458ff8b11233f0`;
 const APPSECRET = `d4b3ef98adbf73cf3d3faffcaab52b21`;
 const REDIRECT_URI = `http://127.0.0.1:7086/callback`;
 
-// 微信验证接口
-router.get('/', async (ctx) => {
-  const { signature, timestamp, nonce, echostr } = ctx.query;
-  const token = `hamuai`;
-
-  const elements = [token, timestamp, nonce].sort();
-  const tempStr = elements.join('');
-  const hash = crypto.createHash('sha1').update(tempStr).digest('hex');
-
-  ctx.body = hash === signature ? echostr : 'Invalid signature';
-});
-
 // OSS 服务
 router.get('/oss/:filename', async (ctx) => {
   const { filename } = ctx.params;
@@ -87,6 +75,18 @@ router.get('/callback', async (ctx) => {
     console.error(error);
     ctx.body = 'Error during login';
   }
+});
+
+// 微信验证接口
+router.get('/', async (ctx) => {
+  const { signature, timestamp, nonce, echostr } = ctx.query;
+  const token = `hamuai`;
+
+  const elements = [token, timestamp, nonce].sort();
+  const tempStr = elements.join('');
+  const hash = crypto.createHash('sha1').update(tempStr).digest('hex');
+
+  ctx.body = hash === signature ? echostr : 'Invalid signature';
 });
 
 app.use(bodyParser());
