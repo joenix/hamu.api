@@ -46,11 +46,9 @@ router.get('/get-access-token', async (ctx) => {
 
 // 获取带参二维码
 router.get('/get-qrcode', async (ctx) => {
-  const { access_token, a } = ctx.query;
-
-  const x = await axios.post(`https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=${access_token}`, { expire_seconds: 86400, action_name: 'QR_SCENE', action_info: { scene: { scene_id: `hamuai` } } });
-
-  console.log(111, x);
+  const { access_token } = ctx.query;
+  const { data } = await axios.post(`https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=${access_token}`, { expire_seconds: 86400, action_name: 'QR_SCENE', action_info: { scene: { scene_id: `hamuai` } } });
+  ctx.body = data;
 });
 
 // 授权重定向接口
