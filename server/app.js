@@ -35,9 +35,8 @@ router.get('/', async (ctx) => {
 
 // 获取 Access Token
 router.get('/get-access-token', async (ctx) => {
-  console.log(111);
-  const x = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`);
-  console.log(222, x);
+  const { data } = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`);
+  ctx.body = data;
 });
 
 // 授权重定向接口
