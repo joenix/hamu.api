@@ -35,8 +35,13 @@ router.get('/', async (ctx) => {
 
 // 获取 Access Token
 router.get('/get-access-token', async (ctx) => {
-  const { data } = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`);
-  ctx.body = data;
+  // 服务号代码，但不明原因不可用
+  // const { data } = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`);
+  // ctx.body = data;
+
+  const a = await axios.post(`https://api.weixin.qq.com/cgi-bin/stable_token`, { grant_type: `client_credential`, appid: APPID, secret: APPSECRET, force_refresh: false });
+  console.log(43, a);
+  // ctx.body =
 });
 
 // 获取带参二维码
