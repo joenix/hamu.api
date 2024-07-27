@@ -11,6 +11,15 @@ const APPID = `wx04fa36ea3e78fe63`;
 const APPSECRET = `d05e9cd46d499b01f1c9ed0599ee204f`;
 const REDIRECT_URI = `http://127.0.0.1:7086/callback`;
 
+// 解决跨域问题
+app.use(
+  cors({
+    origin: '*', // 允许所有域名进行访问
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 允许的请求方法
+    allowHeaders: ['Content-Type', 'Authorization'] // 允许的请求头
+  })
+);
+
 // 微信验证接口
 router.get('/', async (ctx) => {
   const { signature, timestamp, nonce, echostr } = ctx.query;
