@@ -46,9 +46,10 @@ router.get('/get-access-token', async (ctx) => {
 
 // 获取带参二维码
 router.get('/get-qrcode', async (ctx) => {
-  const { access_token } = ctx.query;
+  const { access_token, a } = ctx.query;
 
   console.log('access_token 51', access_token);
+  console.log('a 52', a);
 
   const x = await axios.post(`https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=${access_token}`, { expire_seconds: 86400, action_name: 'QR_SCENE', action_info: { scene: { scene_id: `hamuai` } } });
 
