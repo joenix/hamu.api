@@ -7,8 +7,8 @@ const axios = require('axios');
 const app = new Koa();
 const router = new Router();
 
-const APPID = `wx5d458ff8b11233f0`;
-const APPSECRET = `d4b3ef98adbf73cf3d3faffcaab52b21`;
+const APPID = `wx04fa36ea3e78fe63`;
+const APPSECRET = `AppSecret: d05e9cd46d499b01f1c9ed0599ee204f`;
 const REDIRECT_URI = `http://127.0.0.1:7086/callback`;
 
 // 微信验证接口
@@ -28,6 +28,8 @@ router.get('/qr', async (ctx) => {
   const redirectUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${APPID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
   ctx.redirect(redirectUrl);
 });
+
+// 获取 Access Token
 
 // 回调路由
 router.get('/callback', async (ctx) => {
