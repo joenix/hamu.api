@@ -8,7 +8,7 @@ const app = new Koa();
 const router = new Router();
 
 const APPID = `wx04fa36ea3e78fe63`;
-const APPSECRET = `AppSecret: d05e9cd46d499b01f1c9ed0599ee204f`;
+const APPSECRET = `d05e9cd46d499b01f1c9ed0599ee204f`;
 const REDIRECT_URI = `http://127.0.0.1:7086/callback`;
 
 // 微信验证接口
@@ -21,6 +21,10 @@ router.get('/', async (ctx) => {
   const hash = crypto.createHash('sha1').update(tempStr).digest('hex');
 
   ctx.body = hash === signature ? echostr : 'Invalid signature';
+});
+
+router.get('/get-access-token', async (ctx) => {
+  ctx.body = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`);
 });
 
 // 授权重定向接口
