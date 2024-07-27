@@ -33,6 +33,7 @@ router.get('/', async (ctx) => {
   ctx.body = hash === signature ? echostr : 'Invalid signature';
 });
 
+// 获取 Access Token
 router.get('/get-access-token', async (ctx) => {
   ctx.body = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`);
 });
