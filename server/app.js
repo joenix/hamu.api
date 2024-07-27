@@ -39,6 +39,7 @@ router.get('/get-access-token', async (ctx) => {
   // const { data } = await axios.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${APPID}&secret=${APPSECRET}`);
   // ctx.body = data;
 
+  // 小程序版 Access Token
   const { data } = await axios.post(`https://api.weixin.qq.com/cgi-bin/stable_token`, { grant_type: `client_credential`, appid: APPID, secret: APPSECRET, force_refresh: false });
   ctx.body = data;
 });
@@ -47,7 +48,7 @@ router.get('/get-access-token', async (ctx) => {
 router.get('/get-qrcode', async (ctx) => {
   const { access_token } = ctx.query;
 
-  console.log('access_token', access_token);
+  console.log('access_token 51', access_token);
 
   const x = await axios.post(`https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=${access_token}`, { expire_seconds: 86400, action_name: 'QR_SCENE', action_info: { scene: { scene_id: `hamuai` } } });
 
