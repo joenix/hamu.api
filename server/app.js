@@ -4,6 +4,7 @@ const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const crypto = require('crypto');
 const axios = require('axios');
+const WechatAPI = require('wechat-api');
 
 const app = new Koa();
 const router = new Router();
@@ -11,6 +12,9 @@ const router = new Router();
 const APPID = `wx04fa36ea3e78fe63`;
 const APPSECRET = `d05e9cd46d499b01f1c9ed0599ee204f`;
 const REDIRECT_URI = `http://127.0.0.1:7086/callback`;
+
+const api = new WechatAPI(APPID, APPSECRET);
+console.log(1, api);
 
 // 解决跨域问题
 app.use(
