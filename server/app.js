@@ -21,7 +21,8 @@ app.use(
   cors({
     origin: '*', // 允许所有域名进行访问
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 允许的请求方法
-    allowHeaders: ['Content-Type', 'Authorization'] // 允许的请求头
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'], // 允许的请求头
+    credentials: true // 允许携带凭证，如 cookies
   })
 );
 
@@ -60,8 +61,6 @@ router.get('/qr', async (ctx) => {
   const redirectUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${APPID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
   ctx.redirect(redirectUrl);
 });
-
-// 获取 Access Token
 
 // 回调路由
 router.get('/callback', async (ctx) => {
